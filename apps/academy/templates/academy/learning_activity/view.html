@@ -1,0 +1,99 @@
+{% extends 'learning_activity_base.html' %}
+{% load static %}
+{% load attachments_tags %}
+
+{% block content %}
+<div class="page-section pt-1">
+    <div class="container page__container">
+
+        <div class="title text-center page-section">
+            <h2>Learning Activity Detail </h2>
+        </div>
+
+        <div class="border-left-2 pl-32pt pb-8pt">
+            <div class="d-flex align-items-center  page-num-container">
+                <div class="page-num bg-info"></div>
+                <h4>{{ learning_activity.title }} </h4>
+            </div>
+            <p class="text-70 mb-lg-16pt">{{ learning_activity.description }}</p>
+
+            <div class="position-relative carousel-card">
+                <div class="col card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex">
+                                <!-- <a class="card-title" href="course.html"> Link : {{ learning_activity.link }}</a> -->
+                                <div class="">
+                                    <h6>Competency : </h6>
+                                    {% for competency in learning_activity.competency.all %}
+                                    <small class="text-50 font-weight-bold mb-4pt">
+                                        {{ competency.title }} ,
+                                    </small>
+                                    {% endfor %}
+                                </div>
+                                <hr>
+
+                                {% if  learning_activity.articles.all.count > 0 %}
+                                <h6>Articles To read : </h6>
+                                <div class="row">
+                                    {% for article in learning_activity.articles.all %}
+                                    <div class="col-lg-4 card border-left-4 border-left-warning p-1 m-1 col-md-12">
+                                        <span class="ml-2">{{ article.title }}</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <hr>
+                                {% endif %}
+
+                                {% if  learning_activity.forum.all.count > 0 %}
+                                <h6>Forum Discussion :</h6>
+                                <div class="row">
+                                    {% for forum in learning_activity.forum.all %}
+                                    <div class="col-lg-4 card border-left-4 border-left-info p-1 m-1 col-md-12">
+                                        <span class="ml-2">{{ forum.name }}</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <hr>
+                                {% endif %}
+
+                                {% if  learning_activity.quiz.all.count > 0 %}
+                                <h6>Quiz :</h6>
+                                <div class="row">
+                                    {% for quiz in learning_activity.quiz.all %}
+                                    <div class="col-lg-4 card border-left-4 border-left-success p-1 m-1 col-md-12">
+                                        <span class="ml-2">{{ quiz.question }}</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <hr>
+                                {% endif %}
+
+                            </div>
+                            <small>Cycle {{ learning_activity.cycle }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-secondary" href="{% url 'academy-learning-activity-index'  %}" role="button">Back</a>
+                    </div>
+                    <div class="col text-right">
+                        <a class="btn btn-danger" href="#" role="button">Delete</a>
+                        <a class="btn btn-warning" href="{% url 'academy-learning-activity-edit' id=learning_activity.id %}" role="button">Edit</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+{% endblock %}

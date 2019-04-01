@@ -1,0 +1,67 @@
+{% extends 'event_manager_base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="page-section bg-white border-bottom-2">
+        <div class="container page__container">
+            <a href="{% url 'academy-event-add' %}" class="btn btn-primary mb-16pt float-right">{% trans 'Add Event' %}</a>
+            <!-- Wrapper -->
+            <div data-lists-values='["name"]'>
+                <!-- Table -->
+                <table class="table">
+                <thead>
+                        <th>Event</th>
+                        <th>Learning Plan</th>
+                        <th>Curriculum Title</th>
+                        <th>Location</th>
+                        <th>Academy</th>
+                        <th>Start</th>
+                        <th>Type</th>
+                        <th>Classical / Non Classical</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                        {% for crr in event_manager_list %}
+                        <tr>
+                            <td>{{ crr.event }}</td>
+                            <td>{{ crr.learning_plan }}</td>
+                            <td>{{ crr.curriculum_title }}</td>
+                            <td>{{ crr.location }}</td>
+                            <td>{{ crr.academy }}</td>
+                            <td>{{ crr.start }}</td>
+                            <td>{{ crr.get_type_display }}</td>
+                            <td>{{ crr.get_classic_type_display }}</td>
+                            <td>{{ crr.get_state_display }}</td>
+                            
+                            <td>
+                                <div class="nav-item dropdown d-none d-sm-flex">
+                                    <a href="#" data-toggle="dropdown" class="btn btn-sm btn-dark">
+                                        <i class="material-icons">settings</i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Detail</a>
+                                        <a class="dropdown-item" href="#">Request Expert</a>
+                                        {% if crr.state == 'S' %}
+                                        <a class="dropdown-item" href="{% url 'academy-event-edit' id=crr.id %}">Edit</a>
+                                        <a class="dropdown-item" onclick="return confirm('Are you sure you want to delete this?')" href="{% url 'academy-event-delete' id=crr.id %}">Hapus</a>
+                                        {% endif %}
+                                        {% if crr.state == 'S' %}
+                                        <a class="dropdown-item" onclick="return confirm('Are you sure you want to change the state?')" href="{% url 'academy-event-set-on-going' id=crr.id %}">Set On Going</a>
+                                        {% endif %}
+                                        {% if crr.state == 'O' %}
+                                        <a class="dropdown-item" onclick="return confirm('Are you sure you want to change the state?')" href="{% url 'academy-event-set-finish' id=crr.id %}">Set Finish</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

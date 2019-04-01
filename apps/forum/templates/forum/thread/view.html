@@ -1,0 +1,107 @@
+{% extends 'forum_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container page__container">
+    <div class="page-section">
+        <div class="row m-0">
+            <h1>Thread</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+
+                <h1 class="h2 mb-2">{{ thread.title }}</h1>
+                <div class="text-muted d-flex  mb-16pt mb-lg-32pt">
+                    {% if thread.forum %}
+                        <a href="{% url 'forum-view' id=thread.forum.id %}" class="mr-3 btn btn-sm btn-outline-info btn-rounded">Forum {{ thread.forum.name }}</a>
+                    {% endif %}
+                    <a href="{% url 'forum-thread-edit' id=thread.id %}" class="text-50" style="text-decoration: underline;">Edit</a>
+                    <a href="{% url 'forum-thread-delete' id=thread.id %}" class="text-50 mx-3 text-right" onclick="return confirm('are you sure want to delete Thread?')" style="text-decoration: underline;">Delete</a>
+                </div>
+
+                <div class="card card-body">
+                    <div class="d-flex">
+                        <a href="" class="avatar m-2">
+                            <i class="material-icons md-48">account_circle</i>
+                        </a>
+                        <div class="flex">
+                            <p class="d-flex align-items-center mb-2">
+                                <a href="#" class="text-body mr-2"><strong>{{ thread.author.full_name }}</strong></a>
+                                <small class="text-muted">{{ thread.created|timesince }} ago</small>
+                            </p>
+                            <p>{{ thread.body }}</p>
+                            <div class="d-flex align-items-center">
+                                <a href="" class="text-50 d-flex align-items-center text-decoration-0">
+                                    <i class="material-icons mr-1" style="font-size: inherit;">favorite_border</i> 30
+                                </a>
+                                <a href="" class="text-50 d-flex align-items-center text-decoration-0 ml-3">
+                                    <i class="material-icons mr-1" style="font-size: inherit;">thumb_up</i> 130
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex mb-4">
+                    <a href="#" class="avatar mr-3">
+                        <i class="material-icons md-48">account_circle</i>
+                    </a>
+                    <div class="flex">
+                        <form action="{% url 'forum-thread-comment-add' id=thread.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="comment" class="form-label">Your reply</label>
+                                <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="Comment ..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-accent">Post comment</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="pt-3">
+                    <h4>{{ thread.get_comments.count }} Comments</h4>
+                    
+                    {% for comment in thread.get_comments  %}
+                        <div class="ml-1 mt-2 card p-3">
+                            <div class="d-flex">
+                                <a href="#" class="avatar avatar-xs mr-3">
+                                    <i class="material-icons md-48">account_circle</i>
+                                </a>
+                                <div class="flex">
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="text-body"><strong>{{ comment.author.full_name }}</strong></a>
+                                        <small class="ml-auto text-muted">{{ comment.created|timesince }}</small>
+                                    </div>
+                                    <p class="mt-1 mb-0 text-70">
+                                        {{ comment.body }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <h4 class="card-title">Related Threads</h4>
+                <p class="card-subtitle mb-24pt">popular threads with same tags</p>
+
+                <div class="mb-4">
+
+                    <div class="d-flex align-items-center mb-2">
+                        <a href="#" class="avatar avatar-xs mr-3">
+                            <i class="material-icons md-48">account_circle</i>
+                        </a>
+                        <a href="#" class="flex mr-2 text-body"><strong>{{ thread.title }}</strong></a>
+                        <span class="text-70 mr-2">{{ thread.get_comments.count }}</span>
+                        <i class="text-muted material-icons font-size-16pt">forum</i>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

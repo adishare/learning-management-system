@@ -1,0 +1,91 @@
+{% extends 'strategic_plan_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="" method="POST">
+{% csrf_token %}
+    <div class="page-section container page__container">
+    {{ form|crispy }}
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+<!--         <div class="form-group" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Ubah Strategic Plan</h5>
+                </div>
+                <div class="modal-body">
+                    <label class="col-form-label col-sm-3">Objid</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="objid ..." name="objid" maxlength="255" required id="id_objid">
+                        <a href="#" class="btn btn-secondary btn-sm"><i class="material-icons">
+                            search
+                        </i>Cari</a>
+                    </div>
+                    <label class="col-form-label col-sm-3">Plan Type</label>
+                    <select id="custom-select" class="form-control custom-select" name="plan_type" maxlength="255" required id="id_plan_type">
+                        <option value="0" selected disabled>-- Level --</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="advance">Advance</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                    <label class="col-form-label col-sm-3">Jenis Provider</label>
+                    <select id="custom-select" class="form-control custom-select" name="provider_type" maxlength="255" required id="id_provider_type">
+                        <option value="0" selected disabled>-- Jenis Provider --</option>
+                        <option value="internal">Internal</option>
+                        <option value="external">External</option>
+                    </select>
+                    <label class="col-form-label col-sm-5">Nama Provider</label>
+                    <select id="custom-select" class="form-control custom-select" name="provider_name" maxlength="255" required id="id_provider_name">
+                        <option value="0" selected disabled>-- Provider --</option>
+                        <option value="la1">Learning Area 1</option>
+                        <option value="la2">Learning Area 2</option>
+                    </select>
+                    <label class="col-form-label col-sm-5">Judul</label>
+                    <input type="text" class="form-control" placeholder="Masukan Judul ..." name="title" maxlength="255" required id="id_title">
+                    <label class="col-form-label col-sm-5">Objective</label>
+                    <textarea class="form-control" rows="3" placeholder="Deskripsikan ...." name="objective" maxlength="255" required id="id_objective"></textarea>
+                    <label class="col-form-label col-sm-5">Metode</label>
+                    <select id="custom-select" class="form-control custom-select" name="method" maxlength="255" required id="id_method">
+                        <option value="0" selected disabled>-- Pilih Metode --</option>
+                        <option value="ol">Online</option>
+                        <option value="os">Onside</option>
+                    </select>
+                    <label class="col-form-label col-sm-5">Ubis</label>
+                    <select id="custom-select" class="form-control custom-select" name="business_unit" maxlength="255" required id="id_business_unit">
+                        <option value="0" selected disabled>-- Pilih Ubis --</option>
+                        <option value="Ubis 0">ubis 0</option>
+                        <option value="Ubis 1">ubis 1</option>
+                    </select>
+                    <label class="col-form-label col-sm-5">Job Role</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Role ..." name="job_role" maxlength="255" required id="id_job_role">
+                        <a href="#" class="btn btn-sm btn-secondary"><i class="material-icons">
+                            add
+                        </i>Tambah Job Role</a>
+                    </div>
+                    <label class="col-form-label col-sm-5">Kapasitas/Batch</label>
+                    <input type="text" class="form-control" placeholder="Jumlah" name="capacity" maxlength="255" required id="id_capacity">
+                    <label class="col-form-label col-sm-5">Jumlah</label>
+                    <div class="input-group spinner" style="width: 97%">
+                        <input type="text" class="form-control text-left" value="0" name="total" maxlength="255" required id="id_total">
+                        <div class="input-group-btn-vertical">
+                            <button class="btn btn-sm btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                            <button class="btn btn-sm btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                        </div>
+                    </div>  
+                    <label class="form-control-label col-sm-5">Status</label>
+                    <select id="custom-select" class="form-control custom-select" name="status" maxlength="255" required id="id_status">
+                        <option value="0" selected disabled>-- Pilih Status --</option>
+                        <option value="Planned">Planned</option>
+                        <option value="unplanned">Unplanned</option>
+                    </select>
+                    <label class="form-control-label col-sm-5">Alasan</label>
+                    <textarea class="form-control" rows="3" placeholder="Jelaskan ..." name="reason" maxlength="255" required id="id_reason"></textarea>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</form>
+{% endblock %}

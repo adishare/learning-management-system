@@ -1,0 +1,72 @@
+{% extends 'feedback_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content%}
+<div class="page-section">
+    <div class="container page__container">
+        <div class="page-headline text-center">
+            <h2>Add Testimonial</h2>
+        </div>
+        <!-- <a href="{% url 'feedback-testimonial-view'%}" class="btn btn-success mx-2 mb-16pt float-right">View Testimonial</a> -->
+        <!-- <a href="#" class="btn btn-info mx-2 mb-16pt">+ Category</a> -->
+
+<!--         <div class="row">
+            <div class="col-lg-5 col-xl-4 col-md-7 mb-5">
+                <div class="mdk-reveal__content">
+                    
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex">
+                                <a class="card-title" href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ -->
+
+        <div id="accordion">
+            {% for cat in category_list %}
+            <div class="card">
+                <a class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ cat.id }}" aria-expanded="true" aria-controls="collapseOne">
+                    <div class="card-header" id="heading{{ cat.id }}">
+                        <h5 class="mb-0">
+                            <!-- <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> -->
+                                {{ cat.name }}
+                            <!-- </button> -->
+                        </h5>
+                    </div>
+                </a>
+
+                <div id="collapse{{ cat.id }}" class="collapse hide" aria-labelledby="heading{{ cat.id }}" data-parent="#accordion">
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {% for qst in testimonial_list %}
+
+                                {% if cat.name == qst.category.name %}
+                                
+                                    <h4>{{qst.question}}</h4>
+                                    {{form.answer|as_crispy_field}}
+
+                                {% endif %}
+                                
+                            {% endfor %}
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+</div>
+{% endblock%}

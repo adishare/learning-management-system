@@ -1,0 +1,79 @@
+{% extends 'curriculum_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container page__container py-32pt py-lg-64pt">
+
+    <div class="mb-heading d-flex align-items-center">
+        <h4 class="flex m-0">Available Curriculums</h4>
+        <a href="{% url 'competency-curriculum-add' %}" class="btn btn-sm btn-success">
+            + Create Curriculum
+        </a>
+    </div>
+
+    <div class="row mb-16pt">
+
+        {% for curriculum in curriculum_list %}
+        <div class="col-sm-12 col-xxl-12">
+            <a href="{% url 'competency-curriculum-view' id=curriculum.id %}"
+                class="card card-path overlay js-overlay stack p-2 card card--elevated border-top-4 border-top-primary">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex">
+                            <div class="d-flex align-items-center">
+                                <div class="mr-16pt rounded">
+                                    <small>Isuue</small> <br>
+                                    {{ curriculum.issue }}
+                                </div>
+                                <div class="flex ml-2">
+                                    <h3 class="card-title text-body mb-2">{{ curriculum.title }}</h3>
+                                    <div class=" card-title mb-3 ">{{ curriculum.learning_activity.all.count }}
+                                        Learning Activity </div>
+                                    <div class="text-muted d-flex">
+                                        <!-- <div class="mr-1">Capacity : {{ curriculum.capacity }}  </div> -->
+                                        <!-- <div class="mr-1">  </div> -->
+                                    </div>
+                                    <!-- <div class="text-muted "> </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="ml-4pt text-20 ">Company {{ curriculum.company }}</div> -->
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+    <!-- Pagination -->
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center pagination-sm">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true" class="material-icons">chevron_left</span>
+                <span>Prev</span>
+            </a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link" href="#" aria-label="1">
+                <span>1</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="1">
+                <span>2</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span>Next</span>
+                <span aria-hidden="true" class="material-icons">chevron_right</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+{% endblock %}

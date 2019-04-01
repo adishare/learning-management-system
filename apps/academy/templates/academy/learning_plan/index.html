@@ -1,0 +1,55 @@
+{% extends 'learning_plan_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-section bg-white border-bottom-2">
+    <div class="container page__container">
+        <a href="{% url 'academy-learning-plan-add' %}" class="btn btn-primary mx-2 mb-16pt float-right">Add</a>
+        <!-- Wrapper -->
+        <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Budget</th>
+                        <th>Competency Issue</th>
+                        <th>Participant</th>
+                        <th>Batch</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for learning_plan in learning_plan_list %}
+                    <tr>
+                        <td>{{ learning_plan.title }}</td>
+                        <td>{{ learning_plan.location }}</td>
+                        <td>{{ learning_plan.date }}</td>
+                        <td>{{ learning_plan.budget }}</td>
+                        <td>{{ learning_plan.competency_issue }}</td>
+                        <td>{{ learning_plan.participant }}</td>
+                        <td>{{ learning_plan.batch }}</td>
+                        <td>
+                            <div class="nav-item dropdown d-none d-sm-flex">
+                                <a href="#" data-toggle="dropdown" class="btn btn-sm btn-dark">
+                                    <i class="material-icons">settings</i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{% url 'academy-learning-plan-edit' id=learning_plan.id %}">Edit</a>
+                                    <a class="dropdown-item" onclick="return confirm('Are you sure you want to delete this?')" href="{% url 'academy-learning-plan-delete' id=learning_plan.id %}">Hapus</a>
+                                </div>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

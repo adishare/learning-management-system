@@ -1,0 +1,94 @@
+{% extends 'forum_base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container page__container">
+    <div class="page-section">
+
+        <h4>Threads</h4>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center" style="white-space: nowrap;">
+                    <div class="col-lg-auto">
+                        <form class="search-form search-form--light d-lg-inline-flex mb-8pt mb-lg-0"
+                            action="student-discussions.html">
+                            <input type="text" class="form-control w-lg-auto" placeholder="Search discussions">
+                            <button class="btn" type="submit" role="button"><i
+                                    class="material-icons">search</i></button>
+                        </form>
+                    </div>
+                    <div class="col-lg-auto flex">
+                        <a href="{% url 'forum-thread-add' %}" class="btn btn-accent float-right">Create Thread</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="list-group list-group-flush">
+
+                {% for thread in thread_list %}
+                <div class="list-group-item p-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 mb-8pt mb-md-0">
+                            <div class="media">
+                                <div class="media-left my-auto">
+                                    <span href="#">
+                                        <i class="material-icons">library_books</i>
+                                    </span>
+                                </div>
+                                <div class="media-body media-middle">
+                                    <p class="text-muted m-0">{{ thread.created|timesince }}</p>
+                                    <p class="m-0"><a href="#" class="text-body">{{ thread.author.full_name }}</a>
+                                    </p>
+                                    {% if thread.forum %}
+                                    <p class="m-0 small"><a href="{% url 'forum-view' id=thread.forum.id %}"
+                                            class="text-body">Forum : {{ thread.forum.name }}</a></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-8pt mb-md-0">
+                            <a href="{% url 'forum-thread-view' id=thread.id %}">
+                                <p class="mb-8pt">
+                                    <div href="{% url 'forum-thread-view' id=thread.id %}" class="text-body">
+                                        <strong>{{ thread.title }}</strong>
+                                    </div>
+                                </p>
+                            </a>
+
+                            {% for tag in thread.tag.all  %}
+                            <a href="#"
+                                class="btn btn-outline-secondary btn-rounded btn-sm my-1">{{ tag.name }}</a>
+                            {% endfor %}
+
+                        </div>
+                        <div class="col-auto d-flex flex-column align-items-center justify-content-center">
+                            <h5 class="m-0"> {{ thread.get_comments.count }} </h5>
+                            <p class="lh-1 mb-0"><small class="text-70">comments</small></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+            {% if thread_list.count > 10 %}
+            <div class="card-body text-center">
+                <a href="#" class="text-black-70 text-underline">View more discussions</a>
+            </div>
+            {% elif thread_list.count < 1  %}
+            <div class="card-body text-center">
+                <a href="{% url 'forum-thread-add' %}" class="text-black-70 text-underline">Create First Thread</a>
+            </div>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

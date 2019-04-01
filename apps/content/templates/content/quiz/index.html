@@ -1,0 +1,56 @@
+{% extends 'quiz_base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="page-section">
+        <div class="container page__container">
+
+            <div class="page-heading">
+                <h4>Questions List</h4>
+                <a href="{% url 'content-quiz-add' %}" class="btn btn-sm btn-primary ml-sm-auto">+ Add Quiz Question</a>
+            </div>
+            <div class="row-12">
+                <div class="form-group">
+                    <div class="search-form search-form--light input-group-lg">
+                        <input type="text" class="form-control" placeholder="Search Question" id="searchQuestion">
+                        <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
+                    </div>
+                </div>
+                {% for question in quiz_question_list %}
+                <div class="card border-left-4 card-sm mb-1">
+                    <div class="card-body pl-10pt">
+                        
+                        <div class="media flex-wrap align-items-center p-1">
+                            <div class="media-left">
+                            
+                            <!-- <span class="small {% if question.type == 'PRE' %} text-warning {% else %} text-primary {% endif %}" href="{% url 'content-quiz-view' id=question.id %}">{{ question.get_type_display }}</span> -->
+                            </div>
+                            <div class="media-body ml-1">
+                                <a class="card-title" href="{% url 'content-quiz-view' id=question.id %}">{{ question.title }}</a>
+                            </div>
+                            <div class="media-right">
+                                <div class="nav-item dropdown d-none d-sm-flex">
+                                <div data-toggle="dropdown" class="btn btn-sm btn-dark">
+                                    <i class="material-icons">settings</i>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right ">
+                                    <a class="dropdown-item text-dark" href="#">Assign To Event</a>
+                                    <a class="dropdown-item text-dark" href="{% url 'content-quiz-view' id=question.id %}">Detail</a>
+                                    <a class="dropdown-item text-dark" href="#">Delete</a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+  
+    </div>
+
+
+
+{% endblock %}

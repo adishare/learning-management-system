@@ -1,0 +1,237 @@
+{% extends 'learning_activity_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load attachments_tags %}
+{% block content %}
+    <div class="page-section bg-white border-bottom-2">
+        <div class="container page__container">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add Learning Activity</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <td>
+                            <div class="d-flex">
+                                {% get_attachments_for learning_activity as learning_activity_attachments %}
+                                {% if learning_activity_attachments %}
+                                    <span href="#" >{% attachments_count learning_activity %} attachements</span>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            {% for attachment in learning_activity_attachments %}
+                                <div class="media flex-wrap align-items-center">
+                                    <div class="media-left">
+                                        <i class="material-icons text-50">attachment</i>
+                                    </div>
+                                    <div class="media-body" style="min-width: 180px">
+                                        <a href="{{ attachment.attachment_file.url }}">{{ attachment.filename }}</a>
+                                    </div>
+                                    <div class="media-right mt-sm-0">
+                                        <div class="btn-link" >
+                                            <a href="{{ attachment.attachment_file.url }}" download>
+                                                <i class="material-icons">cloud_download</i> Download
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media-right mt-2 mt-sm-0">
+                                        <div class="btn btn-link text-secondary" >
+                                            {% attachment_delete_link attachment %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </td>
+                        <div class="modal-footer">
+                            <a href="{% url 'academy-learning-activity-index' %}" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                    <div class="row-4 m-4">
+                        {% attachment_form learning_activity %}
+                    </div>
+                    <h1>Attachment</h1>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tabcontent" id="Privat">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-4 col-xl-3">
+                                        <div class="card card--elevated card-course" data-partial-height="40" data-toggle="popover" data-trigger="click">
+                                            <a href="instructor-edit-course.html" class="js-image" data-position="">
+                                                <img src="{% static 'images/paths/angular_430x168.png' %}" alt="course">
+                                            </a>
+                                            <div class="mdk-reveal__content">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex">
+                                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">Angular.pdf</a>
+                                                        </div>
+                                                        <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3">
+                                        <div class="card card--elevated card-course" data-partial-height="40" data-toggle="popover" data-trigger="click">
+                                            <a href="instructor-edit-course.html" class="js-image" data-position="">
+                                                <img src="{% static 'images/paths/wordpress_430x168.png' %}" alt="course">
+                                            </a>
+                                            <div class="mdk-reveal__content">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex">
+                                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">Wordpress.pdf</a>
+                                                        </div>
+                                                        <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3">
+                                        <div class="card card--elevated card-course" data-partial-height="40" data-toggle="popover" data-trigger="click">
+                                            <a href="instructor-edit-course.html" class="js-image" data-position="">
+                                                <img src="{% static 'images/paths/swift_430x168.png' %}" alt="course">
+                                            </a>
+                                            <div class="mdk-reveal__content">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex">
+                                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">Swift.pdf</a>
+                                                        </div>
+                                                        <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3">
+                                        <div class="card card--elevated card-course" data-partial-height="40" data-toggle="popover" data-trigger="click">
+                                            <a href="instructor-edit-course.html" class="js-image" data-position="left">
+                                                <img src="{% static 'images/paths/react_430x168.png' %}" alt="course">
+                                            </a>
+                                            <div class="mdk-reveal__content">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex">
+                                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">React Native.pdf</a>
+                                                        </div>
+                                                        <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add File</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block modal%}
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                    <a href="" class="btn btn-primary">Select</a>
+                    <a href="" class="btn btn-secondary">Upload</a>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="tabcontent" id="Privat">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-xl-3">
+                                <div class="card card--elevated card-course" data-partial-height="40" data-toggle="popover" data-trigger="click">
+                                    <a href="instructor-edit-course.html" class="js-image" data-position="">
+                                        <img src="{% static 'images/paths/angular_430x168.png' %}" alt="course">
+                                    </a>
+                                    <div class="mdk-reveal__content">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="flex">
+                                                    <a class="card-title mb-4pt" href="instructor-edit-course.html">Angular.pdf</a>
+                                                </div>
+                                                <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-xl-3">
+                                <div class="card card--elevated card-course" data-partial-height="40" data-toggle="popover" data-trigger="click">
+                                    <a href="instructor-edit-course.html" class="js-image" data-position="">
+                                        <img src="{% static 'images/paths/wordpress_430x168.png' %}" alt="course">
+                                    </a>
+                                    <div class="mdk-reveal__content">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="flex">
+                                                    <a class="card-title mb-4pt" href="instructor-edit-course.html">Wordpress.pdf</a>
+                                                </div>
+                                                <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-xl-3">
+                                <div class="card card--elevated card-course" data-partial-height="40" data-toggle="popover" data-trigger="click">
+                                    <a href="instructor-edit-course.html" class="js-image" data-position="">
+                                        <img src="{% static 'images/paths/swift_430x168.png' %}" alt="course">
+                                    </a>
+                                    <div class="mdk-reveal__content">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="flex">
+                                                    <a class="card-title mb-4pt" href="instructor-edit-course.html">Swift.pdf</a>
+                                                </div>
+                                                <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-xl-3">
+                                <div class="card card--elevated card-course" data-partial-height="40" data-toggle="popover" data-trigger="click">
+                                    <a href="instructor-edit-course.html" class="js-image" data-position="left">
+                                        <img src="{% static 'images/paths/react_430x168.png' %}" alt="course">
+                                    </a>
+                                    <div class="mdk-reveal__content">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="flex">
+                                                    <a class="card-title mb-4pt" href="instructor-edit-course.html">React Native.pdf</a>
+                                                </div>
+                                                <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'event_manager_testimonial_base.html' %}
+{% load static %}
+
+{% block content%}
+<div class="page-section bg-white border-bottom-2">
+    <div class="container page__container">
+        {% for cat in category_list %}
+            <a href="#" class="btn btn-primary mx-2 mb-16pt">{{ cat.name }}</a>
+        {% endfor %}
+        <!-- <a href="{% url 'feedback-testimonial-add' %}" class="btn btn-primary mx-2 mb-16pt float-right">Add Category</a> -->
+        <!-- Wrapper -->
+        <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Event</th>
+                        <th>Category</th>
+                        <th>Question</th>
+
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for testimonial in testimonial_list %}
+                    <tr>
+                        <td>{{ testimonial.code }}</td>
+                        <td>{{ testimonial.event }}</td>
+                        <td>{{ testimonial.category }}</td>
+                        <td>{{ testimonial.question }}</td>                       
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock%}

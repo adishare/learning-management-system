@@ -1,0 +1,104 @@
+{% extends 'forum_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container page__container">
+    <form action="" method="POST">
+        {% csrf_token %}  
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="page-section">
+                    <h4>Create New Forum</h4>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div role="group" aria-labelledby="label-forum" class="m-0 form-group">
+                                    <div class="form-row">
+                                        <label id="label-forum" for="forum" class="col-md-3 col-form-label form-label">
+                                            Name
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input id="name" name='name' 
+                                                placeholder="Fourm Name" 
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div role="group" aria-labelledby="label-forum" class="m-0 form-group">
+                                    <div class="form-row">
+                                        <label id="label-forum" for="forum" class="col-md-3 col-form-label form-label">
+                                            Forum Description
+                                        </label>
+                                        <div class="col-md-9">
+                                            <textarea id="description" name='description' placeholder="Describe your forum in detail ..." rows="4"
+                                                class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="form-group m-0" role="group" aria-labelledby="label-competency">
+                                    <div class="form-row align-items-center ">
+                                        <label id="label-competency" for="competency" class="col-md-3 col-form-label form-label">Competency</label>
+                                        <div class="col-md-9">
+                                            {% for value, text in form.competency.field.choices %}
+                                                <div class="custom-control custom-checkbox">
+                                                    <input id="id_competency_{{value}}" name="competency" value="{{value}}" type="checkbox" class="custom-control-input">
+                                                    <label for="id_competency_{{ value }}" class="custom-control-label"> {{ text }} </label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="form-group m-0" role="group" aria-labelledby="label-proficiency">
+                                    <div class="form-row align-items-center ">
+                                        <label id="label-proficiency" for="proficiency" class="col-md-3 col-form-label form-label">Proficiency</label>
+                                        <div class="col-md-9">
+                                            {% for value, text in form.proficiency.field.choices %}
+                                                <div class="custom-control custom-checkbox">
+                                                    <input id="id_proficiency_{{value}}" name="proficiency" value="{{value}}" type="checkbox" class="custom-control-input">
+                                                    <label for="id_proficiency_{{ value }}" class="custom-control-label"> {{ text }}  </label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="list-group-item">
+                                <div class="float-right">
+                                    <a href="{% url 'forum-index' %}" class="btn btn-secondary  mx-1">Cancel</a>
+                                    <button type="submit" class="btn btn-accent  mx-1">Save</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 page-nav">
+                <div data-perfect-scrollbar data-perfect-scrollbar-wheel-propagation="true">
+                    <div class="page-section pt-lg-112pt">
+                        <div class="nav page-nav__menu">
+                            <a href="javascript:void(0)" class="nav-link active">Creating Forum</a>
+                        </div>
+                        <div class="page-nav__content">
+                            <p class="text-70">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus nulla veritatis tempora quis nesciunt? Itaque pariatur harum expedita accusamus voluptatum!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

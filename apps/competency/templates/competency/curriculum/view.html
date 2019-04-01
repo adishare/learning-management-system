@@ -1,0 +1,186 @@
+{% extends 'curriculum_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="bg-white border-bottom-2">
+    <div class="py-1">
+        <div class="container page__container">
+            <div class="row">
+                <h4 class="col-12 mt-2">Curriculum Detail : </h4>
+                <h1 class="col">{{ curriculum.title }} </h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="bg-white border-bottom-2">
+    <div class="py-4">
+        <div class="container page__container">
+            <div class="row">
+                <div class="col-lg-6 mb-24pt mb-lg-0">
+                    <div class="border-left-3 border-left-primary pl-24pt pl-md-32pt">
+                        <span>
+                            <h5 class="mb-8pt">Issue :</h5>
+                            <p class="text-70 mb-16pt">{{ curriculum.issue }}</p>
+                        </span>
+                        <span>
+                            <h5 class="mb-8pt">Competency Goal :</h5>
+                            <p class="text-70 mb-16pt">{{ curriculum.competency_goal }}</p>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-24pt mb-lg-0">
+                    <div class="border-left-3 border-left-secondary pl-24pt pl-md-32pt">
+                        <span>
+                            <h5 class="mb-8pt">Capacity :</h5>
+                            <p class="text-70 mb-16pt">{{ curriculum.capacity }}</p>
+                        </span>
+                        <span>
+                            <h5 class="mb-8pt">Claim :</h5>
+                            <p class="text-70 mb-16pt">{{ curriculum.get_claim_display }}</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container page__container">
+
+    <div class="title pt-lg-4">
+        <h2>Learning Activity :</h2>
+    </div>
+
+    {% for learning_activity in curriculum.learning_activity.all  %}
+    <div class="border-left-2 pl-32pt pb-8pt">
+        <div class="d-flex align-items-center page-num-container">
+            <div class="page-num">{{ forloop.counter }}</div>
+            <h4>{{ learning_activity.title }} </h4>
+        </div>
+        <p class="text-70 mb-lg-16pt">{{ learning_activity.description }}</p>
+
+        <div class="position-relative carousel-card">
+            <div class="col card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex">
+                            <!-- <a class="card-title" href="course.html"> Link : {{ learning_activity.link }}</a> -->
+                            <div class="">
+                                <h6>Competency : </h6>
+                                {% for competency in learning_activity.competency.all %}
+                                <small class="text-50 font-weight-bold mb-4pt">
+                                    {{ competency.title }} ,
+                                </small>
+                                {% endfor %}
+                            </div>
+                            <hr>
+
+                            {% if  learning_activity.articles.all.count > 0 %}
+                            <h6>Articles To read : </h6>
+                            <div class="row">
+                                {% for article in learning_activity.articles.all %}
+                                <div class="col-lg-4 card border-left-4 border-left-warning p-1 m-1 col-md-12">
+                                    <span class="ml-2">{{ article.title }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            {% endif %}
+
+                            {% if  learning_activity.forum.all.count > 0 %}
+                            <h6>Forum Discussion :</h6>
+                            <div class="row">
+                                {% for forum in learning_activity.forum.all %}
+                                <div class="col-lg-4 card border-left-4 border-left-info p-1 m-1 col-md-12">
+                                    <span class="ml-2">{{ forum.name }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            {% endif %}
+
+                            {% if  learning_activity.quiz.all.count > 0 %}
+                            <h6>Quiz :</h6>
+                            <div class="row">
+                                {% for quiz in learning_activity.quiz.all %}
+                                <div class="col-lg-4 card border-left-4 border-left-success p-1 m-1 col-md-12">
+                                    <span class="ml-2">{{ quiz.question }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            {% endif %}
+
+                        </div>
+                        <small>Cycle {{ learning_activity.cycle }}</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <a href="{% url 'competency-curriculum-remove-learning-activity' id=curriculum.id learningActivityId=learning_activity.id %}" class="col px-3 text-right text-underline">
+                    Remove
+                </a>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    {% endfor %}
+
+    <div class="row">
+        <div class="col">
+            <div class="text-center page-section">
+                <div class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalAddLearningActivity">+ Add
+                    Learning Activity</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAddLearningActivity" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="{% url 'competency-curriculum-add-learning-activity' id=curriculum.id %}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{ add_learning_activity_form | crispy }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+{% endblock %}

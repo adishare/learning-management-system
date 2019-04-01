@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Article Page{% endblock %}
+
+{% block outer_content %}
+
+<div class="mdk-box bg-dark mdk-box--bg-gradient-primary js-mdk-box mb-0" data-effects="blend-background">
+    <div class="mdk-box__content">
+        <div class="hero container page__container py-64pt py-md-112pt text-center text-sm-left">
+            <h1 class="text-white mb-24pt">Article</h1>
+
+            <p class="lead measure-hero-lead text-white mb-24pt">
+                    write your article and share knowledge with others to help each other    
+            </p>
+
+        </div>
+    </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="mt-16pt col-md-8 alert alert-{{message.tags}}" role="alert">
+  <strong>{{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% block content %}{% endblock %}
+
+{% endblock %}

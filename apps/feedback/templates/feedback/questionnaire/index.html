@@ -1,0 +1,35 @@
+{% extends 'expert_base.html' %}
+{% load static %}
+
+{% block content%}
+<div class="page-section">
+    <div class="container page__container">
+        <div class="page-headline text-center">
+            <h2>Questionnaire by Event</h2>
+            <!-- <p class="lead text-black-70 measure-lead mx-auto">Get the Technology and Creative Skills you need to launch a career by learning from industry experts.</p> -->
+        </div>
+
+        <div class="row">
+            {% for ev in event_list %}
+            <div class="col-lg-5 col-xl-4 col-md-7 mb-5">
+                <div class="mdk-reveal__content">
+                    
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex">
+                                <a class="card-title" href="{% url 'feedback-questionnaire-participant-list' %}">{{ ev.event }}</a>
+                                <!-- <small class="text-black-50 font-weight-bold mb-4pt">by : {{ article.author.full_name}}</small> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="page-separator mt-lg-16pt">
+        <a href="" class="page-separator__text">show more <span class="material-icons">keyboard_arrow_down</span></a>
+    </div>
+</div>
+{% endblock%}

@@ -1,0 +1,60 @@
+{% extends 'content_base.html' %}
+{% load static %}
+{% load attachments_tags %}
+
+{% block content %}
+
+<div class="page-section">
+        <div class="container page__container">
+            <div class="page-headline text-center">
+                <h2>Recently added</h2>
+                <!-- <p class="lead text-black-70 measure-lead mx-auto">Get the Technology and Creative Skills you need to launch a career by learning from industry experts.</p> -->
+            </div>
+
+            <div class="page-heading">
+                <h4>Top Article People Read</h4>
+                <a href="{% url 'content-article-add' %}" class="btn btn-sm btn-primary ml-sm-auto">Add Article</a>
+            </div>
+            <div class="row">
+                {% for article in article_list %}
+                {% if article.state == 'P' %}
+                <div class="col-lg-6 col-xl-6 col-md-12 mb-1">
+                        <div class="mdk-reveal__content card card--elevated">
+                            
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="flex">
+                                        <a class="card-title" href="{% url 'content-article-view' article.slug %}">{{ article.title }}</a>
+                                        <small class="text-black-50 font-weight-bold mb-4pt">by : {{ article.author.full_name}}</small>
+                                    </div>
+                                    {% get_attachments_for article as article_attachments %}
+                                    {% if article_attachments %}
+                                    <span href="#" class="ml-4pt text-secondary small">{% attachments_count article %} attachements</span>
+                                    {% endif %}
+                                </div>
+                                <div class="d-flex mt-2">
+                                    <div class="rating flex">
+                                        {% for category in article.category.all %}
+                                            <div class="badge badge-info mr-1">{{ category }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    <small class="text-black-50">
+                                            {{article.publish_date|timesince }} Ago
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="page-separator mt-lg-16pt">
+            <a href="" class="page-separator__text">show more <span class="material-icons">keyboard_arrow_down</span></a>
+        </div>
+    </div>
+
+
+
+{% endblock %}

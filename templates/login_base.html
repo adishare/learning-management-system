@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block outer_content %}
+<div class="mdk-header-layout__content page-content pb-0">         
+    <div class="bg-gradient-primary py-32pt">
+        <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
+            <img src="{% static 'images/illustration/student/128/white.svg' %}" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+            <div class="flex mb-32pt mb-md-0">
+                <h1 class="text-white mb-0">Sign In</h1>
+                <p class="lead measure-lead text-white-50">Sign in to get new knowledge</p>
+            </div>
+            <!--<a href="#" class="btn btn-outline-white flex-column">
+                Belum Punya Akun?
+                <span class="btn__secondary-text">Daftar Sekarang!</span>
+            </a>-->
+        </div>
+    </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="mt-16pt alert alert-{{message.tags}}" role="alert">
+  <strong>{{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% block content %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'content_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="page-section border-bottom-2">
+    <div class="container page__container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Article</h5>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col px-5 py-2 flex ">
+                            <div class="flex mx-5">
+                                <div class="form-group">
+                                    {{ form.title|as_crispy_field }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.body|as_crispy_field }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.category|as_crispy_field }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.competency|as_crispy_field }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.proficiency|as_crispy_field }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="{% url 'content-article-index' %}"  class="btn btn-block btn-secondary" >Cancel</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="submit" class="btn btn-block btn-primary" value="Save">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'learning_activity_base.html' %}
+{% load static %}
+{% load attachments_tags %}
+
+{% block content %}
+
+
+<div class="page-section">
+    <div class="container page__container">
+
+        <div class="page-heading">
+            <h4>Learning Activity List</h4>
+            <a href="{% url 'academy-learning-activity-add' %}" class="btn btn-sm btn-primary ml-sm-auto">+ Add Learning
+                Activity</a>
+        </div>
+        <div class="row-12">
+            <div class="form-group">
+                <div class="search-form search-form--light input-group-lg">
+                    <input type="text" class="form-control" placeholder="Activity ..." id="searchActivity">
+                    <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
+                </div>
+            </div>
+            {% for learning_activity in learning_activity_list %}
+            <div class="card border-left-4 border-left-info card-sm mb-1">
+                <div class="card-body pl-10pt">
+
+                    <div class="media flex-wrap align-items-center p-1">
+                        <div class="media-left">
+
+                            <span class="text-info "
+                                href="{% url 'academy-learning-activity-view' id=learning_activity.id %}">Cycle
+                                {{ learning_activity.cycle }}</span>
+                        </div>
+                        <div class="media-body ml-1">
+                            <a class="card-title"
+                                href="{% url 'academy-learning-activity-view' id=learning_activity.id %}">{{ learning_activity.title }}</a>
+                        </div>
+                        <div class="media-right">
+                            <div class="nav-item dropdown d-none d-sm-flex">
+                                <div data-toggle="dropdown" class="btn btn-sm btn-dark">
+                                    <i class="material-icons">settings</i>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right ">
+                                    <a href="#" class="dropdown-item text-dark">Assign To Curriculum</a>
+                                    <a href="{% url 'academy-learning-activity-view' id=learning_activity.id %}"
+                                    class="dropdown-item text-dark">Detail</a>
+                                    <a href="{% url 'academy-learning-activity-edit' id=learning_activity.id %}" class="dropdown-item text-dark">Edit</a>
+                                    <a href="#" class="dropdown-item text-dark">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Prevent the demo from appearing in search engines -->
+    <meta name="robots" content="noindex">
+    <!-- Perfect Scrollbar -->
+    <link type="text/css" href="{% static 'vendor/perfect-scrollbar.css' %}" rel="stylesheet">
+    <!-- Fix Footer CSS -->
+    <link type="text/css" href="{% static 'vendor/fix-footer.css' %}" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link type="text/css" href="{% static 'css/material-icons.css' %}" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link type="text/css" href="{% static 'css/fontawesome.css' %}" rel="stylesheet">
+    <!-- Preloader -->
+    <link type="text/css" href="{% static 'css/preloader.css' %}" rel="stylesheet">
+    <!-- App CSS -->
+    <link type="text/css" href="{% static 'css/app.css' %}" rel="stylesheet">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Header Layout -->
+    <div class="mdk-header-layout js-mdk-header-layout">
+
+        <!-- Header -->
+        {% if request.user.is_authenticated %}
+        <div id="header" class="mdk-header bg-dark js-mdk-header mb-0" data-effects="waterfall blend-background"
+            data-fixed data-condenses>
+            <div class="mdk-header__content">
+
+                <div class="navbar navbar-expand-sm navbar-dark bg-dark pr-0 pr-md-16pt" id="navbar" data-primary>
+
+                    <!-- Navbar toggler -->
+                    <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button"
+                        data-toggle="sidebar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navbar Brand -->
+                    <a href="{% url 'landing-index' %}" class="navbar-brand">
+                        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{% static 'images/logo/Corpu.png' %}"
+                            width="40" alt="Corpu">
+                        <span class="d-none d-md-block">Corpu</span>
+                    </a>
+
+                    <button class="btn btn-black mr-16pt" data-toggle="modal" data-target="#courses">Courses <i
+                            class="material-icons">arrow_drop_down</i></button>
+
+                    <form class="search-form search-form--black search-form-courses d-none d-md-flex"
+                        action="library-filters.html">
+                        <input type="text" class="form-control" placeholder="What would you like to learn?">
+                        <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
+                    </form>
+
+                    <!-- Main Navigation -->
+
+                    <nav class="nav navbar-nav ml-auto flex-nowrap">
+                        <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                <h3>ID</h3>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <h6 class="dropdown-header">Language Option</h6>
+                                <a class="dropdown-item active" href="#">Indonesia</a>
+                                <a class="dropdown-item" href="#">English</a>
+                            </div>
+
+                        </div>
+                        <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                <img width="32" height="32" class="rounded-circle"
+                                    src="{% static 'images/people/50/guy-3.jpg' %}" alt="student" />
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+
+                                <h6 class="dropdown-header">Role</h6>
+                                {% for role in request.user.role.all %}
+                                <a class="dropdown-item"
+                                    href="{% if role.landing_url_name %}{% url role.landing_url_name %}{% endif %}">{{ role.name }}</a>
+                                {% endfor %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'account-logout' %}">Logout</a>
+
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown dropdown-notifications dropdown-full-xs">
+                            <button class="nav-link btn-flush dropdown-toggle" type="button" data-toggle="dropdown"
+                                data-caret="false">
+                                <i class="material-icons">notifications</i>
+                                <span class="badge badge-pill badge-accent">2</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="list-group list-group-flush">
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <small class="text-muted list-group-item-meta">3 min ago</small>
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="material-icons md-2 icon--left text-danger">account_circle</i>
+                                            </div>
+                                            <div class="media-body align-self-center">
+                                                <p class="mb-1 lh-1">Your profile information has not been synced
+                                                    correctly.</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="list-group-item list-group-item-action">
+                                        <small class="text-muted list-group-item-meta">5 hrs ago</small>
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="material-icons md-2 icon--left text-success">group_add</i>
+                                            </div>
+                                            <div class="media-body align-self-center">
+                                                <p class="mb-1 lh-1"><a href="#" class="flex-inline">Adrian. D</a> wants
+                                                    to join you.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <small class="text-muted list-group-item-meta">1 day ago</small>
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="material-icons md-2 icon--left text-warning">storage</i>
+                                            </div>
+                                            <div class="media-body align-self-center">
+                                                <p class="mb-1 lh-1">Your deploy was successful.</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <!-- // END Main Navigation -->
+
+                </div>
+
+            </div>
+        </div>
+        {% endif %}
+        <!-- // END Header -->
+
+        <!-- Header Layout Content -->
+
+        {% block outer_content %}{% endblock %}
+        <!-- // END Header Layout Content -->
+
+    </div>
+    <!-- // END Header Layout -->
+
+    <div class="bg-white js-fix-footer">
+        <div class="bg-footer page-section py-lg-12pt">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-md-right">
+                        <p class="text-white-50 mb-0">Copyright 2019 &copy; Telkom Corporate University.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block modal %}{% endblock %}
+
+    <!-- jQuery -->
+    <script src="{% static 'vendor/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendor/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap.min.js' %}"></script>
+    <!-- Perfect Scrollbar -->
+    <script src="{% static 'vendor/perfect-scrollbar.min.js' %}"></script>
+    <!-- DOM Factory -->
+    <script src="{% static 'vendor/dom-factory.js' %}"></script>
+    <!-- MDK -->
+    <script src="{% static 'vendor/material-design-kit.js' %}"></script>
+    <!-- Fix Footer -->
+    <script src="{% static 'vendor/fix-footer.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendor/Chart.min.js' %}"></script>
+    <!-- App JS -->
+    <script src="{% static 'js/app.js' %}"></script>
+    <!-- Highlight.js -->
+    <script src="{% static 'js/hljs.js' %}"></script>
+    <!-- Extra js block -->
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+{% extends 'strategic_plan_base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-section bg-white border-bottom-2">
+    <div class="container page__container">
+        <a href="{% url 'landing-strategic-plan-add' %}" class="btn btn-primary mb-16pt float-right">Add</a>
+
+<!--         <a href="#" class="btn btn-light mb-16pt float-right">Request Kurikulum</a>
+ -->        
+        <!-- Wrapper -->
+        <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Strategic Initiative</th>
+                        {% for field in fields %}
+                        <th>{{ field.name }}</th>
+                        {% endfor %}
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for sl in strategic_list %}
+                    <tr>
+                        <td>{{ sl.strategic_initiative }}</td>
+                        {% for issue in sl.strategicplanissue %}
+                        {% if issue %}
+                        <td>{{ issue.content }}</td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                        {% endfor %}
+
+                        <td>
+                            <div class="nav-item dropdown d-none d-sm-flex">
+                                <a href="#" data-toggle="dropdown" class="btn btn-sm btn-dark">
+                                    <i class="material-icons">settings</i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{% url 'landing-strategic-plan-edit' id=sl.id %}">Edit</a>
+                                    <a class="dropdown-item" onclick="return confirm('Are you sure you want to delete this?')" href="{% url 'landing-strategic-plan-delete' id=sl.id %}">Hapus</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                        {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+<!-- // END Header Layout Content -->
+</div>
+<!-- // END Header Layout -->
+{% endblock %}

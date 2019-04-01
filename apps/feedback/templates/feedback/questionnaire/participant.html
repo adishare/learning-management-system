@@ -1,0 +1,50 @@
+{% extends 'expert_base.html'%}
+{% load static %}
+
+{% block content %}
+<div class="page-section bg-white border-bottom-2">
+    <div class="container page__container">
+
+<!--         <a href="#" class="btn btn-light mb-16pt float-right">Request Kurikulum</a>
+ -->        
+        <!-- Wrapper -->
+        <div class="page-headline text-center">
+            <h2>Questionnaire by Participant</h2>
+            <!-- <p class="lead text-black-70 measure-lead mx-auto">Get the Technology and Creative Skills you need to launch a career by learning from industry experts.</p> -->
+        </div>
+        <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>Telephone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for particpant in participant_list %}
+                    <tr>
+                        <td>{{ particpant.name }}</td>
+                        <td>{{ particpant.age }}</td>
+                        <td>{{ particpant.address }}</td>
+                        <td>{{ particpant.telephone_number }}</td>
+
+                        <td>
+                            <div class="nav-item dropdown d-none d-sm-flex">
+                                <a href="{% url 'feedback-questionnaire-add' %}" class="btn btn-sm btn-dark">
+                                    <i class="material-icons">edit</i>&nbsp;Questionnaire
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

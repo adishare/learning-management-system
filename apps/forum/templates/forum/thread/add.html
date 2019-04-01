@@ -1,0 +1,76 @@
+{% extends 'forum_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container page__container">
+    <form action="" method="POST">
+        {% csrf_token %}  
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="page-section">
+                    <h4>Create New Thread</h4>
+
+                        <div class="card--connect pb-8pt pb-lg-8pt">
+                            <div class="card o-hidden mb-0">
+                                <div class="card-body table--elevated">
+                                    <div class="form-group m-0" role="group" aria-labelledby="label-title">
+                                        <div class="form-row align-items-center">
+                                            <label id="label-title" for="title" class="col-md-3 col-form-label form-label">Title</label>
+                                            <div class="col-md-9">
+                                                <input required id="title" name="title" type="text" placeholder="Thread Title ..." class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                                            
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div role="group" aria-labelledby="label-thread" class="m-0 form-group">
+                                    <div class="form-row">
+                                        <label id="label-thread" for="thread" class="col-md-3 col-form-label form-label">
+                                            Thread Content
+                                        </label>
+                                        <div class="col-md-9">
+                                            <textarea required id="content" name='content' placeholder="Describe your thread in detail ..." rows="4"
+                                                class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                {{ form.tag|as_crispy_field }}
+                                </div>
+                            <div class="list-group-item">
+                                {{ form.forum|as_crispy_field }}
+                            </div>
+
+                            <div class="list-group-item">
+                                <button type="submit" class="btn btn-accent">Save</button>
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 page-nav">
+                <div data-perfect-scrollbar data-perfect-scrollbar-wheel-propagation="true">
+                    <div class="page-section pt-lg-112pt">
+                        <div class="nav page-nav__menu">
+                            <a href="javascript:void(0)" class="nav-link active">Before you post</a>
+                        </div>
+                        <div class="page-nav__content">
+                            <p class="text-70">There may be other students who have create the same thread before.</p>
+                            <p class="text-70">You should do a quick search first to make sure your thread is unique.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

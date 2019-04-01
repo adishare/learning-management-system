@@ -1,0 +1,16 @@
+{% extends 'strategic_plan_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="" method="POST">
+{% csrf_token %}
+    <div class="page-section container page__container">
+    {{ form|crispy }}
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+
+    </div>
+</form>
+{% endblock %}

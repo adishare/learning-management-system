@@ -1,0 +1,102 @@
+{% extends 'quiz_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-section mt-3">
+    <div class="container page__container">
+
+        <div class="page-heading">
+            <h4>Question Detail</h4>
+        </div>
+
+        <div class="card p-4">
+
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex">
+                        <div class='card-header'>
+                            <h5 class="card-title" href="#">{{ quiz_question.title }}</h5>
+                        </div>
+                        <div class="col mt-2">
+                            <h5>Question :</h5>
+                        </div>
+                        <p class="card-body"> {{ quiz_question.question }} ? </p>
+                        <div class="col">
+                            <h5>Options :</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-6 col-md-12 mb-2 mdk-reveal__content">
+                                <div class="card card-body">
+                                    <div class="d-flex">
+                                        <div class="d-flex">
+                                            <a class="card-title mr-2" href="#">A.</a>
+                                            <a class="" href="#">{{ quiz_question.option_a }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-12 mb-2 mdk-reveal__content">
+                                <div class="card card-body">
+                                    <div class="d-flex">
+                                        <div class="d-flex">
+                                            <a class="card-title mr-2" href="#">B.</a>
+                                            <a class="" href="#">{{ quiz_question.option_b }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-12 mb-2 mdk-reveal__content">
+                                <div class="card card-body">
+                                    <div class="d-flex">
+                                        <div class="d-flex">
+                                            <a class="card-title mr-2" href="#">C.</a>
+                                            <a class="" href="#">{{ quiz_question.option_c }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-12 mb-2 mdk-reveal__content">
+                                <div class="card card-body">
+                                    <div class="d-flex">
+                                        <div class="d-flex">
+                                            <a class="card-title mr-2" href="#">D.</a>
+                                            <a class="" href="#">{{ quiz_question.option_d }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3">
+                                <h5>Competency :</h5>
+                                {% for competency in quiz_question.competency.all  %}
+                                    <p> {{ competency.title }}</p>                                
+                                {% endfor %}
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <h5>Proficiency :</h5>
+                                {% for proficiency in quiz_question.proficiency.all  %}
+                                    <p> {{ proficiency.level }}</p>                                
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex">
+                <a href="{% url 'content-quiz-index' %}" class="btn btn-sm btn-secondary m-1 ">Back To Quiz Index</a>
+                <div class="ml-sm-auto">
+                    <a href="#" class="btn btn-sm btn-danger m-1">Delete</a>
+                    <a href="{% url 'content-quiz-edit' id=quiz_question.id %}" class="btn btn-sm btn-warning m-1">Edit
+                        Question</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
