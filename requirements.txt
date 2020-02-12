@@ -1,6 +1,6 @@
 certifi==2018.11.29
 chardet==3.0.4
-Django==2.1.7
+Django==2.2.10
 https://github.com/ezyatev/django-admin-menu/archive/master.zip
 django-attachments==1.4
 django-ckeditor==5.6.1
